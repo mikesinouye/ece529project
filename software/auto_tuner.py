@@ -72,7 +72,7 @@ class AutoTuner:
         self.frequency_list = np.zeros(self.ss_sliced_track.shape[0])
         i = 0
         for s in self.ss_sliced_track:
-            ss = ssat.SmallSampleAutoTuner(s, self.sampling_frequency, ss_size, 8000, 261.63)
+            ss = ssat.SmallSampleAutoTuner(s, self.sampling_frequency, ss_size, 8000, self.key_center_frequency)
             self.tuned_sliced_track[i, :] = ss.out_time_signal_padded[0:ss_size]
             self.frequency_list[i] = ss.corrected_note_freq
             i += 1
