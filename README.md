@@ -24,4 +24,4 @@ To run, call monophonic_tuner.py with the following arguments:
   * give the overlap between segments to be tuned. the default is 64
   
   #### Example Execution
-  `python monophonic_tuner.py -i example0.wav -oexample0_output.wav -fc 440 -fl 20 -fu 5000 -ss 2048 -so 64`
+  `python monophonic_tuner.py -i example0.wav -o example0_output.wav -fc 440 -fl 20 -fu 5000 -ss 2048 -so 64`
