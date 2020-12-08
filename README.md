@@ -22,3 +22,6 @@ To run, call monophonic_tuner.py with the following arguments:
   * give the segment size for tuning. note: segments must be large enough for the lowest frequency to be detectable. the default is 2048. note: must be smaller than 8000
 * -so segment_overlap   
   * give the overlap between segments to be tuned. the default is 64
+  
+  #### Example Execution
+  `python monophonic_tuner.py -i example0.wav`
