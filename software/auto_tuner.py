@@ -36,7 +36,7 @@ def recombine_track(sliced_track, ss_buffer):
     for s in range(1, num_slices):
         tuned_track[s * window:(s + 1) * window] = sliced_track[s, 0:window]
         a = [sliced_track[s - 1, window:ss_size], sliced_track[s, 0:ss_buffer]]
-        average = np.mean(a, axis=0)
+        average = np.sum(a, axis=0)
         tuned_track[s * window:s * window + ss_buffer] = average
     return tuned_track
 

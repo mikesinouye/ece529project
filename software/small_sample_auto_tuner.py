@@ -37,6 +37,8 @@ def tune_to_key(note):
     # passes in a "note" which is an integer telling the relation in half steps to the key center
 
     # get more digits of the note then convert to integer
+    if note > 10000000 or note < -10000000:
+        return 0
     note = round(note * 1000)
     # start by finding the octave relation
     octave = int(np.floor(note / 12000))
@@ -82,6 +84,8 @@ def inverse_dft(input_size, freq_signal):
 def resampling(time_signal, num_samples, new_num_samples):
     # 2 point linear resampling: calc the weighted mean between the points that the new point should be sampled at
     # get new sampling rate relative to num samples
+    if new_num_samples == 0:
+        return time_signal
     sampling_rate_rel = num_samples / new_num_samples
     new_time_signal = np.zeros(new_num_samples)
     new_time_signal[0] = time_signal[0]
