@@ -64,9 +64,12 @@ def test_full_at():
 
 def test_on_real():
     sample_rate, wave_in = read('example0.wav')
-    wave_in_filtered = at.perform_butterworth_filtering(wave_in[:,0], np.array([20, 5000]), sample_rate, 20, 5000)
-    my_at = at.AutoTuner(wave_in_filtered, sample_rate, 261.63, 2048, 64)
+    # check dimension
+    if wave_in.ndim > 1:
+        wave_in = wave_in[:, 0]
+    wave_in_filtered = at.perform_butterworth_filtering(wave_in, np.array([40, 3500]), sample_rate, 40, 3500)
+    my_at = at.AutoTuner(wave_in_filtered, sample_rate, 440, 2048, 0)
     filtered_track = at.perform_butterworth_filtering(my_at.tuned_track, my_at.frequency_list, my_at.sampling_frequency,
-                                                      20, 5000)
+                                                      150, 3500)
     wave_out = at.convert_to_wav_array(filtered_track)
-    write('output_example0_filtered2.wav', sample_rate, wave_out)
+    write('help.wav', sample_rate, wave_out)

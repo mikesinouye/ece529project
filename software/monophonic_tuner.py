@@ -38,8 +38,11 @@ args = parser.parse_args()
 
 # get input signal
 sample_rate, wave_in = read(args.i)
+# check dimension
+if wave_in.ndim > 1:
+    wave_in = wave_in[:,0]
 # filter input
-wave_in_filtered = at.perform_butterworth_filtering(wave_in[:, 0], np.array([args.fl, args.fu]), sample_rate, args.fl,
+wave_in_filtered = at.perform_butterworth_filtering(wave_in, np.array([args.fl, args.fu]), sample_rate, args.fl,
                                                     args.fu)
 # tune input
 my_at = at.AutoTuner(wave_in_filtered, sample_rate, args.fc, args.ss, args.so)
