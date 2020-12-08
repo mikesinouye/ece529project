@@ -9,7 +9,10 @@
  */
 
 #include "arduinoFFT.h"
+#define SAVE_AND_PLAY 1
+#define ON_THE_FLY 0
 
+const int operationMode = SAVE_AND_PLAY;
 const int NUM_SAMPLES = 512; // total samples to collect per note
 const int numNotes = 8; // number of notes to round to, inclding no notes
 const int buzzerPin = 12; // GPIO for buzzer
@@ -38,16 +41,18 @@ void setup() {
 
 void loop() {
   // song finished
-  if (noteNum != 0 && (notem1 == names[0]) && (notem2 == names[0])) {
-    delay(2000);
-    for (int i = 0; i < noteNum; i++) {
-          playbackSamples(notes[corrected[i]]);
-          delay(400);
+  if (operationMode == SAVE_AND_PLAY) {
+    if (noteNum != 0 && (notem1 == names[0]) && (notem2 == names[0])) {
+      delay(2000);
+      for (int i = 0; i < noteNum; i++) {
+            playbackSamples(notes[corrected[i]]);
+            delay(400);
+      }
+      noteNum = 0;
+      notem1 = ' ';
+      notem2 = ' ';
+      Serial.println("Waiting for next song!");
     }
-    noteNum = 0;
-    notem1 = ' ';
-    notem2 = ' ';
-    Serial.println("Waiting for next song!");
   }
   
   //Serial.println("Awaiting next note...");
@@ -58,11 +63,16 @@ void loop() {
   autotunedNoteIndex = autoTuneSamplesFFT();
   //Serial.println(names[autotunedNoteIndex]);
   //delay(300); // Is an extra delay needed before playing?
-  //playbackSamples(notes[autotunedNoteIndex]); // Live auto tune
-  corrected[noteNum] = autotunedNoteIndex; 
-  noteNum++;
-  notem2 = notem1;
-  notem1 = names[autotunedNoteIndex];
+  
+  if (operationMode == ON_THE_FLY) {
+    playbackSamples(notes[autotunedNoteIndex]); // Live auto tune
+  }
+  else {
+    corrected[noteNum] = autotunedNoteIndex; 
+    noteNum++;
+    notem2 = notem1;
+    notem1 = names[autotunedNoteIndex];
+  }
 }
 
 // Sample PWM output. Add delay to get around 20kHz sampling frequency
