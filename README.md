@@ -30,18 +30,18 @@ To run, call monophonic_tuner.py with the following arguments:
 To run, modify project_microcontroller.ino and deploy onto an Arduino Mega 2560
 #### required: 
 
-`const int operationMode = SAVE_AND_PLAY; // choose either SAVE_AND_PLAY or ON_THE_FLY
+`const int operationMode = SAVE_AND_PLAY; // choose either SAVE_AND_PLAY or ON_THE_FLY`
 
-const int NUM_SAMPLES = 512; // total samples to collect per note
+`const int NUM_SAMPLES = 512; // total samples to collect per note`
 
-const int numNotes = 8; // number of notes to round to, inclding no notes
+`const int numNotes = 8; // number of notes to round to, inclding no notes`
 
-const int buzzerPin = 12; // GPIO for buzzer
+`const int buzzerPin = 12; // GPIO for buzzer`
 
-const int detectPin = 2; // GPIO for incoming buzzer signal
+`const int detectPin = 2; // GPIO for incoming buzzer signal`
 
-const int noteDuration = 300; // 300ms note playback
+`const int noteDuration = 300; // 300ms note playback`
 
-const long int notes[numNotes] = {0, 262, 294, 329, 349, 392, 440, 494}; // note frequencies in major key
+`const long int notes[numNotes] = {0, 262, 294, 329, 349, 392, 440, 494}; // note frequencies in major key`
 
-const char names[numNotes] = {'X', 'C', 'D', 'E', 'F', 'G', 'A', 'B'}; // note names to select`
+`const char names[numNotes] = {'X', 'C', 'D', 'E', 'F', 'G', 'A', 'B'}; // note names to select`
